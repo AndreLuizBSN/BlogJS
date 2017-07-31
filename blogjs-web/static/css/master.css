@@ -1,0 +1,26 @@
+.navbar .divider-vertical {
+  height: 50px;
+  margin: 0 9px;
+  border-right: 1px solid #c5bdbd;
+  border-left: 1px solid #f2f2f2;
+  font-family: Arial; }
+
+.navbar-inverse .divider-vertical {
+  border-right-color: #222222;
+  border-left-color: #111111; }
+
+.tag-post {
+  padding: 5px;
+  border-top: 1px solid #f5f5f5; }
+  .tag-post span {
+    padding: 5px;
+    background: #393d52;
+    border-radius: 2px;
+    margin: 5px;
+    box-shadow: 0 0 1px solid; }
+
+@media (max-width: 767px) {
+  .navbar-collapse .nav > .divider-vertical {
+    display: none; } }
+
+/*# sourceMappingURL=master.css.map */

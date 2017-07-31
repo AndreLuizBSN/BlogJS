@@ -1,0 +1,11 @@
+<form>
+  <div class="form-group">
+    <label for="titulo">Título</label>
+    <input type="text" class="form-control" id="titulo" ng-model="post.titulo">
+  </div>
+  <div class="form-group">
+    <label for="conteudo">Conteúdo</label>
+    <textarea name="name" rows="8" cols="80" id="conteudo" ng-model="post.conteudo" class="form-control"></textarea>
+  </div>
+  <button class="btn btn-primary" ng-click="cadastrar(post)">Cadastrar</button>
+</form>

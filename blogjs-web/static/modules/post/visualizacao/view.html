@@ -1,0 +1,10 @@
+<div class="panel panel-primary">
+  <div class="panel-heading" ng-bind="post.titulo"></div>
+  <div class="panel-body">
+    <div ng-bind="post.conteudo"></div>
+  </div>
+  <div class="panel-footer">
+    <div ng-bind="post.dataPostagem | date:'dd/MM/yyyy hh:mm:ss'"></div>
+    <a class="btn btn-default" href="#/usuario/{{usuarioId}}/posts">Posts</a>
+  </div>
+</div>
