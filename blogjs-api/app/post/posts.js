@@ -10,7 +10,7 @@ var cadastrar = function(post, quandoSalvar, quandoDerErro){
   });
 }
 
-var listarPorUsuario = function(usuarioId, quandoListar, quandoDerErro){
+var listarPorUsuario = function(pagina, itensPorPag, usuarioId, quandoListar, quandoDerErro){
   Post.find({usuarioId : usuarioId})
   .exec(function(err, posts){
     if(err){
@@ -21,9 +21,9 @@ var listarPorUsuario = function(usuarioId, quandoListar, quandoDerErro){
   });
 }
 
-var listarTodos = function(quandoListar, quandoDerErro){
+var listarTodos = function(pagina, itensPorPag, quandoListar, quandoDerErro){
   //Post.find()
-  Post.paginate({}, {page: 1, limit: 3}
+  Post.paginate({}, {page: parseInt(pagina), limit: parseInt(itensPorPag)}
   ,function(err, posts){
     if(err){
       quandoDerErro(err);
@@ -31,6 +31,18 @@ var listarTodos = function(quandoListar, quandoDerErro){
       quandoListar(posts);
     }
   });
+}
+
+var buscarPorNome = function(pagina, itensPorPag, nome, quandoListar, quandoDerErro){
+  Post.paginate({$or:[{titulo : new RegExp(nome, "i")}, {conteudo : new RegExp(nome, "i")}]}
+    , {page: parseInt(pagina), limit: parseInt(itensPorPag)}
+    , function(err, posts){
+      if(err){
+        quandoDerErro(err);
+      }else{
+        quandoListar(posts);
+      }
+    });
 }
 
 var buscar = function(usuarioId, postId, quandoListar, quandoDerErro){
@@ -44,13 +56,8 @@ var buscar = function(usuarioId, postId, quandoListar, quandoDerErro){
   });
 }
 
-var buscarPorNome = function(nome, quandoListar, quandoDerErro){
-  /*var regex = {$regex : nome}
-  Post.find({titulo : regex})*/
-  //new RegExp(titulo, "i") = like "%titulo%"
-  //"i" = to ignore uppercase and lowercase
-
-  Post.find({$or:[{titulo : new RegExp(nome, "i")}, {conteudo : new RegExp(nome, "i")}]})
+var buscarGlobal = function(postId, quandoListar, quandoDerErro){
+  Post.findOne({_id : postId})
   .exec(function(err, posts){
     if(err){
       quandoDerErro(err);
@@ -60,8 +67,10 @@ var buscarPorNome = function(nome, quandoListar, quandoDerErro){
   });
 }
 
+
 exports.cadastrar = cadastrar;
 exports.listarPorUsuario = listarPorUsuario;
 exports.listarTodos = listarTodos;
 exports.buscar = buscar;
 exports.buscarPorNome = buscarPorNome;
+exports.buscarGlobal = buscarGlobal;

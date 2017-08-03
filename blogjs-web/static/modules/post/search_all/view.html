@@ -24,7 +24,7 @@
   </div>
   <div class="panel-body">
     <div class="list-group" ng-repeat="post in posts">
-      <a href="#" class="list-group-item active">
+      <a href="#/posts/{{post._id}}" class="list-group-item active">
         <h4 class="list-group-item-heading" ng-bind="post.titulo"></h4>
         <p class="list-group-item-text" ng-bind="post.dataPostagem | date:'dd/MM/yyyy hh:mm:ss'"></p>
         <div class="tag-post">
@@ -35,30 +35,34 @@
   </div>
   <div class="panel-footer">
     <div class="row">
-      <div class="col-sm-2">
-        <p>Total de posts: {{totalPosts}}</p>
-      </div>
-      <div class="col-sm-6">
+      <div class="col-sm-10 text-center">
         <nav aria-label="...">
           <ul class="pagination">
-            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">2 </a></li>
-            <li><a href="#">3 </a></li>
-            <li><a href="#">4 </a></li>
-            <li>
-              <a href="#" aria-label="Next">
+            <li ng-class="{disabled: paginaAtual==1}">
+              <a ng-click="carregarPagina(paginaAtual-1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li ng-repeat="pag in montarPaginas(paginaTotal) track by $index"
+              ng-class="{active: $index+1==paginaAtual}">
+              <a ng-click="carregarPagina($index+1)">{{$index+1}} </a>
+            </li>
+            <li ng-class="{disabled: paginaAtual==paginaTotal}">
+              <a ng-click="carregarPagina(paginaAtual+1)" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
           </ul>
         </nav>
       </div>
-      <div class="col-sm-2">
-        <p>Pagina atual: {{paginaAtual}}</p>
-      </div>
-      <div class="col-sm-2">
-        <p>Pagina Páginas: {{paginaTotal}}</p>
+      <div class="col-sm-2 text-center">
+        <label for="nrPPag">Nº por PG</label>
+        <input type="number"
+          id="nrPPag"
+          ng-model="selPag"
+          ng-change="atualizarPosts()"
+          ng-model-options='{debounce: 500}'
+          class="form-control">
       </div>
     </div>
   </div>

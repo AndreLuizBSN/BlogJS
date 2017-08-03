@@ -23,14 +23,16 @@ var listarPorUsuario = function(request, response){
 var listarTodos = function(request, response){
 
   var filtro = request.query.filtro;
+  var pagina = request.query.pagina || 1;
+  var itensPorPag = request.query.itensporpag || 5;
   if(filtro){
-    posts.buscarPorNome(filtro, function(posts){
+    posts.buscarPorNome(pagina, itensPorPag, filtro, function(posts){
       response.status(200).json(posts);
     }, function(err){
       response.status(400).json(err);
     })
   }else{
-    posts.listarTodos(function(posts){
+    posts.listarTodos(pagina, itensPorPag, function(posts){
       response.status(200).json(posts);
     }, function(err){
       response.status(400).json(err);
@@ -48,8 +50,18 @@ var buscar = function(request, response){
   })
 }
 
+var buscarGlobal = function(request, response){
+  var postId = request.params.postId;
+  posts.buscarGlobal(postId, function(posts){
+    response.status(200).json(posts);
+  }, function(err){
+    response.status(400).json(err);
+  })
+}
+
 //Torna publico as funções
 exports.cadastrar = cadastrar;
 exports.listarPorUsuario = listarPorUsuario;
 exports.listarTodos = listarTodos;
 exports.buscar = buscar;
+exports.buscarGlobal = buscarGlobal;

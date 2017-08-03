@@ -1,0 +1,37 @@
+<div class="panel panel-primary" ng-init="init()">
+  <div class="panel-heading" ng-bind="post.titulo"></div>
+  <div class="panel-body">
+    <div ng-bind-html="post.conteudo"></div>
+  </div>
+  <div class="panel-footer">
+      <div class="comentarios">
+          <div class="row" ng-repeat="com in post.comentarios track by $index">
+              <div>
+                  <b>{{com.usuario}}</b> comentou em <b>{{com.dataComentario | date: 'dd/MM/yyyy hh:mm:ss'}}:</b>
+              </div>
+              <div>
+                  {{com.conteudo}}
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <div>
+            <label for="email">Seu email:</label>
+            <input id="email" ng-model="comentario.email" class="form-control"></input>
+        </div>
+        <div>
+            <label for="comentario">Seu comentário:</label>
+            <textarea id="comentario" ng-model="comentario.conteudo" class="form-control"></textarea>
+        </div>
+        <div>
+            <button ng-click="comentar(comentario)" class="btn btn-primary">Comentar</button>
+        </div>
+    </div>
+</div>
+<a ng-href="#/posts" class="btn btn-default">
+  Ver outros posts
+</a>

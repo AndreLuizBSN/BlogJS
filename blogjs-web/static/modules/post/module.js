@@ -14,5 +14,8 @@ angular.module('blogjs.post').config(function($routeProvider,$locationProvider){
   }).when('/posts',{
     controller: 'PostSearchAllController',
     templateUrl : 'modules/post/search_all/view.html'
+  }).when('/posts/:postId',{
+    controller: 'PostViewGlobalController',
+    templateUrl : 'modules/post/visualizacao_global/view.html'
   });
 });

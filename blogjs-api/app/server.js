@@ -21,6 +21,7 @@ app.get('/v1/posts', postController.listarTodos);
 app.get('/v1/usuarios/:usuarioId/posts', postController.listarPorUsuario);
 app.get('/v1/usuarios/:usuarioId/posts/:postId', postController.buscar);
 app.post('/v1/usuarios/:usuarioId/posts', postController.cadastrar);
+app.get('/v1/posts/:postId', postController.buscarGlobal);
 
 
 

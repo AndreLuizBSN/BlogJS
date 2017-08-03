@@ -1,8 +1,10 @@
 angular.module('blogjs.post').controller('PostSearchAllController', function($scope, posts){
 
-  var carregarTodosPosts = function(){
+  $scope.selPag = 5;
 
-    var promise = posts.listarTodos($scope.filtroPosts);
+  var carregarTodosPosts = function(pagina){
+
+    var promise = posts.listarTodos($scope.filtroPosts, pagina, $scope.selPag);
     promise.then(function(resultado){
       $scope.totalPosts = resultado.data.total;
       $scope.paginaAtual = resultado.data.page;
@@ -18,5 +20,12 @@ angular.module('blogjs.post').controller('PostSearchAllController', function($sc
     carregarTodosPosts();
   }
 
+  $scope.montarPaginas = function(paginas){
+    return new Array(paginas);
+  }
+
+  $scope.carregarPagina = function(pagina){
+    carregarTodosPosts(pagina);
+  }
   carregarTodosPosts();
 });

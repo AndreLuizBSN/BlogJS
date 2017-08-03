@@ -1,0 +1,20 @@
+<div class="panel panel-primary" ng-init="init()">
+  <div class="panel-heading">Todos os posts</div>
+  <div class="panel-body">
+    <div ng-repeat="post in posts">
+      <div class="row post-item">
+        <a ng-href="#/usuarios/{{usuario._id}}/posts/{{post._id}}">
+          <div class="col-sm-8">
+            {{post.titulo}}
+          </div>
+          <div class="col-sm-4">
+            {{post.dataPostagem | date:'dd/MM/yyyy hh:mm:ss'}}
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <a href="#usuarios/{{usuario._id}}/posts/novo" class="btn btn-primary">Novo Post</a>
+  </div>
+</div>
